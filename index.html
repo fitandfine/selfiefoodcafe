@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- 
+      Selfie Food Cafe KK Shop - Bilingual Website (English/Nepali)
+      Author: You
+      Description:
+        This page is similar to the Nelson Cafe template, adapted for Selfie Food Cafe KK Shop
+        in Golfutaar, Kathmandu. The menu items, contact info, and cultural references have been 
+        updated. Includes bilingual toggle (English <-> Nepali), contact modals, 
+        and a link to the Facebook page.
+     -->
+
+    <!-- Required Meta Tags -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Selfie Food Cafe KK Shop - Menu</title>
+    
+    <!-- Example FontAwesome for Icons (optional) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+    <!-- ========== CSS Styles ========== -->
+    <style>
+        /* ================= BASIC RESET & GLOBAL STYLES ================= */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #fefaf5;
+            color: #333;
+            line-height: 1.5;
+            text-align: center;
+            position: relative;
+        }
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* ================= HEADER ================= */
+        header {
+            background: #ff6f00; /* Orange theme header */
+            color: #fff;
+            padding: 20px 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            position: relative;
+        }
+        header h1 {
+            font-size: 2rem;
+            margin-bottom: 6px;
+        }
+        header p {
+            font-size: 1.1rem;
+        }
+
+        /* ================= MARQUEE (FIXED) ================= */
+        .allergy-marquee {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: #b71c1c; /* Deep red for bold attention */
+            color: #fff;
+            z-index: 9999;
+            padding: 6px 0;
+        }
+        .allergy-marquee marquee {
+            font-weight: bold;
+            font-size: 1rem;
+        }
+
+        /* 
+          Add top margin to the rest of the content 
+          so it doesn't get hidden behind the fixed marquee 
+        */
+        .content-wrapper {
+            margin-top: 40px;
+        }
+
+        /* ================= PROMINENT NOTE ================= */
+        .prominent-note {
+            background: #ffe0b2; /* Light orange background */
+            border-left: 8px solid #e65100; /* Deeper orange accent */
+            color: #333;
+            text-align: left;
+            max-width: 800px;
+            margin: 0 auto;
+            margin-top: 10px;
+            margin-bottom: 20px;
+            padding: 15px;
+            border-radius: 5px;
+            font-weight: bold;
+            font-size: 1rem;
+        }
+        .prominent-note span {
+            color: #e65100; /* highlight text */
+        }
+
+        /* ================= MENU SECTION ================= */
+        .menu-section {
+            width: 95%;
+            max-width: 1000px;
+            margin: 20px auto;
+            background: #fff3e0; /* Soft background */
+            padding: 20px;
+            border-radius: 8px;
+            border: 2px solid #ffb74d;
+        }
+        .menu-section h2 {
+            color: #d32f2f; /* Red accent for headings */
+            margin-bottom: 15px;
+            font-size: 1.6rem;
+        }
+        .menu-lists {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-evenly;
+            gap: 20px;
+        }
+        .menu-list {
+            flex: 1 1 300px;
+            min-width: 280px;
+            max-width: 400px;
+            text-align: left;
+            background-color: #fff;
+            padding: 10px;
+            border-radius: 6px;
+            margin-bottom: 10px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        .menu-list h3 {
+            font-size: 1.2rem;
+            color: #e65100; 
+            margin-bottom: 10px;
+            border-bottom: 2px solid #d32f2f;
+            display: inline-block;
+            padding-bottom: 5px;
+        }
+        .menu-item {
+            margin-bottom: 6px;
+            font-size: 0.95rem;
+            display: flex;
+            justify-content: space-between;
+        }
+        .menu-item span {
+            font-weight: bold;
+        }
+
+        /* ================= INTRO SECTION ================= */
+        .intro-section {
+            width: 95%;
+            max-width: 800px;
+            margin: 20px auto;
+            background: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            padding: 20px;
+        }
+        .intro-section h2 {
+            color: #e65100;
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+        }
+        .intro-section p {
+            font-size: 1rem;
+            color: #333;
+            margin-bottom: 10px;
+        }
+        .address {
+            font-size: 1rem;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        /* ================= FOOTER ================= */
+        footer {
+            background-color: #ff6f00;
+            color: #fff;
+            width: 100%;
+            padding: 15px 0;
+            text-align: center;
+            font-size: 16px;
+            box-shadow: 0 -2px 4px rgba(0,0,0,0.1);
+            position: fixed;
+            bottom: 0;
+            left: 0;
+        }
+        footer a {
+            text-decoration: none;
+            color: #fff;
+        }
+
+        /* ================= MODALS (QR + CONTACT) ================= */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 99999;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.6);
+        }
+        .modal-content {
+            background-color: #fff;
+            margin: 15% auto;
+            padding: 20px;
+            width: 300px;
+            border-radius: 10px;
+            position: relative;
+        }
+        .close {
+            color: #aaa;
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            font-size: 24px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .close:hover,
+        .close:focus {
+            color: #000;
+            text-decoration: none;
+        }
+        .qr-img {
+            width: 80%;
+            height: auto;
+        }
+        .contact-button {
+            background-color: #d32f2f;
+            color: #fff;
+            border: none;
+            padding: 10px;
+            margin: 5px 0;
+            width: 100%;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+        .contact-button:hover {
+            background-color: #b71c1c;
+        }
+
+        /* ================= RESPONSIVE DESIGN ================= */
+        @media(max-width: 600px) {
+            .menu-lists {
+                flex-direction: column;
+                align-items: center;
+            }
+            .intro-section, .menu-section {
+                margin: 10px auto;
+                padding: 10px;
+            }
+            .menu-list {
+                margin-bottom: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ========== MARQUEE (FOOD ALLERGY WARNING) ========== -->
+    <div class="allergy-marquee">
+        <marquee id="allergy-marquee-en" scrollamount="5" behavior="scroll" direction="left">
+            Please be advised if you have any food allergy, talk with us before you order.
+        </marquee>
+        <marquee id="allergy-marquee-ne" scrollamount="5" behavior="scroll" direction="left" style="display:none;">
+            यदि तपाईंलाई कुनै खानेकुरा एलर्जी छ भने, अर्डर गर्नु अघि कृपया हामीलाई जानकारी दिनुहोस्।
+        </marquee>
+    </div>
+<br>
+    <!-- ========== HEADER ========== -->
+    <header>
+        <h1 id="title-en">Selfie Food Cafe KK Shop</h1>
+        <h1 id="title-ne" style="display:none;">सेल्फी फूड क्याफे केके शप</h1>
+        <p id="tagline-en">A Taste of Nepali Culinary in the Heart of Golfutaar</p>
+        <p id="tagline-ne" style="display:none;">गोल्फुटारको मुटुमा नेपाली पाककलाको स्वाद</p>
+        
+        <!-- Language Toggle Buttons -->
+        <div>
+            <button style="background:#d32f2f; color:#fff; border:none; padding:8px 16px; border-radius:4px; cursor:pointer; margin-right:5px;" onclick="showEnglish()">English</button>
+            <button style="background:#d32f2f; color:#fff; border:none; padding:8px 16px; border-radius:4px; cursor:pointer;" onclick="showNepali()">नेपाली</button>
+        </div>
+    </header>
+
+    <!-- ========== PAGE CONTENT WRAPPER ========== -->
+    <div class="content-wrapper">
+
+        <!-- INTRO SECTION -->
+        <div class="intro-section">
+            <h2 id="intro-title-en">Welcome to Selfie Food Cafe KK Shop</h2>
+            <h2 id="intro-title-ne" style="display:none;">सेल्फी फूड क्याफे केके शपमा स्वागत छ</h2>
+            <p id="intro-text-en">
+                We are located at <span class="address">Golfutaar, Kathmandu</span>.
+                Come experience a blend of Nepali flavors with fresh, made-to-order delicacies.
+            </p>
+            <p id="intro-text-ne" style="display:none;">
+                हामी <span class="address">गोल्फुटार, काठमाडौं</span>मा अवस्थित छौं।
+                ताजा, अर्डर पाएपछि मात्रै बनाइने नेपाली परिकारको स्वाद लिनुहोस्।
+            </p>
+        </div>
+
+        <!-- PROMINENT NOTE: Apology (No Pre-Made Food) -->
+        <div class="prominent-note" id="apology-en">
+            <span>Note:</span> We prepare all dishes fresh upon order. We do not serve pre-made items.
+        </div>
+        <div class="prominent-note" id="apology-ne" style="display:none;">
+            <span>सूचना:</span> हामी सबै परिकार अर्डर पाएपछि ताजा बनाउँछौं। तयार खाना दिइँदैन।
+        </div>
+
+        <!-- ========== MENU SECTION ========== -->
+        <div class="menu-section">
+            <h2 id="menu-section-title-en">Our Menu</h2>
+            <h2 id="menu-section-title-ne" style="display:none;">हाम्रो मेनु</h2>
+
+            <div class="menu-lists">
+
+                <!-- Momo -->
+                <div class="menu-list">
+                    <h3 id="momo-title-en">Momo</h3>
+                    <h3 id="momo-title-ne" style="display:none;">मम</h3>
+                    <div class="menu-item">
+                        <span id="momo-veg-jhol-en">Veg (Jhol)</span>
+                        <span>110</span>
+                        <span id="momo-veg-jhol-ne" style="display:none;">भेज (झोल)</span>
+                    </div>
+                    <div class="menu-item">
+                        <span id="momo-veg-fry-en">Veg (Fry)</span>
+                        <span>120</span>
+                        <span id="momo-veg-fry-ne" style="display:none;">भेज (फ्राई)</span>
+                    </div>
+                    <div class="menu-item">
+                        <span id="momo-veg-sea-en">Veg (Sea)</span>
+                        <span>130</span>
+                        <span id="momo-veg-sea-ne" style="display:none;">भेज (सिया)</span>
+                    </div>
+
+                    <div class="menu-item">
+                        <span id="momo-buff-jhol-en">Buff (Jhol)</span>
+                        <span>130</span>
+                        <span id="momo-buff-jhol-ne" style="display:none;">बफ (झोल)</span>
+                    </div>
+                    <div class="menu-item">
+                        <span>Buff (Fry)</span><span>150</span>
+                    </div>
+                    <div class="menu-item">
+                        <span>Buff (Sea)</span><span>180</span>
+                    </div>
+
+                    <div class="menu-item">
+                        <span>Chicken (Jhol)</span><span>150</span>
+                    </div>
+                    <div class="menu-item">
+                        <span>Chicken (Fry)</span><span>170</span>
+                    </div>
+                    <div class="menu-item">
+                        <span>Chicken (Sea)</span><span>200</span>
+                    </div>
+                </div>
+
+                <!-- Chowmin -->
+                <div class="menu-list">
+                    <h3>Chowmin</h3>
+                    <div class="menu-item">
+                        <span>Veg (Half)</span><span>60</span>
+                    </div>
+                    <div class="menu-item">
+                        <span>Veg (Full)</span><span>110</span>
+                    </div>
+                    <div class="menu-item">
+                        <span>Buff (Half)</span><span>70</span>
+                    </div>
+                    <div class="menu-item">
+                        <span>Buff (Full)</span><span>130</span>
+                    </div>
+                    <div class="menu-item">
+                        <span>Chicken (Half)</span><span>75</span>
+                    </div>
+                    <div class="menu-item">
+                        <span>Chicken (Full)</span><span>150</span>
+                    </div>
+                    <div class="menu-item">
+                        <span>Egg (Half)</span><span>75</span>
+                    </div>
+                    <div class="menu-item">
+                        <span>Egg (Full)</span><span>150</span>
+                    </div>
+                    <div class="menu-item">
+                        <span>Mix (Half)</span><span>100</span>
+                    </div>
+                    <div class="menu-item">
+                        <span>Mix (Full)</span><span>200</span>
+                    </div>
+                </div>
+
+                <!-- Fry Rice -->
+                <div class="menu-list">
+                    <h3>Fry Rice</h3>
+                    <div class="menu-item">
+                        <span>Veg (Half)</span><span>60</span>
+                    </div>
+                    <div class="menu-item">
+                        <span>Veg (Full)</span><span>110</span>
+                    </div>
+                    <div class="menu-item">
+                        <span>Buff (Half)</span><span>70</span>
+                    </div>
+                    <div class="menu-item">
+                        <span>Buff (Full)</span><span>130</span>
+                    </div>
+                    <div class="menu-item">
+                        <span>Chicken (Half)</span><span>75</span>
+                    </div>
+                    <div class="menu-item">
+                        <span>Chicken (Full)</span><span>150</span>
+                    </div>
+                    <div class="menu-item">
+                        <span>Egg (Half)</span><span>70</span>
+                    </div>
+                    <div class="menu-item">
+                        <span>Egg (Full)</span><span>140</span>
+                    </div>
+                    <div class="menu-item">
+                        <span>Mix (Half)</span><span>100</span>
+                    </div>
+                    <div class="menu-item">
+                        <span>Mix (Full)</span><span>180</span>
+                    </div>
+                </div>
+
+                <!-- Syavale -->
+                <div class="menu-list">
+                    <h3>Syavale</h3>
+                    <div class="menu-item">
+                        <span>Buff</span><span>100</span>
+                    </div>
+                    <div class="menu-item">
+                        <span>Chicken</span><span>100</span>
+                    </div>
+                    <div class="menu-item">
+                        <span>Mix</span><span>130</span>
+                    </div>
+                </div>
+
+                <!-- Local Items -->
+                <div class="menu-list">
+                    <h3>Local Items</h3>
+                    <div class="menu-item">
+                        <span>Alu-Chop</span><span>30</span>
+                    </div>
+                    <div class="menu-item">
+                        <span>Alu-Chana</span><span>70</span>
+                    </div>
+                    <div class="menu-item">
+                        <span>Alu Stick</span><span>200</span>
+                    </div>
+                    <div class="menu-item">
+                        <span>Samosa</span><span>30</span>
+                    </div>
+                    <div class="menu-item">
+                        <span>Bread Chop</span><span>30</span>
+                    </div>
+                    <div class="menu-item">
+                        <span>Boiled Egg</span><span>35</span>
+                    </div>
+                    <div class="menu-item">
+                        <span>Omlet</span><span>40</span>
+                    </div>
+                    <div class="menu-item">
+                        <span>Alu Paratha</span><span>60</span>
+                    </div>
+                    <div class="menu-item">
+                        <span>Laccha Paratha</span><span>40</span>
+                    </div>
+                    <div class="menu-item">
+                        <span>Jhol Tarkari</span><span>40</span>
+                    </div>
+                </div>
+
+                <!-- Thukpa -->
+                <div class="menu-list">
+                    <h3>Thukpa</h3>
+                    <div class="menu-item">
+                        <span>Veg (Half)</span><span>60</span>
+                    </div>
+                    <div class="menu-item">
+                        <span>Veg (Full)</span><span>110</span>
+                    </div>
+                    <div class="menu-item">
+                        <span>Buff (Half)</span><span>70</span>
+                    </div>
+                    <div class="menu-item">
+                        <span>Buff (Full)</span><span>130</span>
+                    </div>
+                    <div class="menu-item">
+                        <span>Chicken (Half)</span><span>75</span>
+                    </div>
+                    <div class="menu-item">
+                        <span>Chicken (Full)</span><span>150</span>
+                    </div>
+                    <div class="menu-item">
+                        <span>Egg (Half)</span><span>70</span>
+                    </div>
+                    <div class="menu-item">
+                        <span>Egg (Full)</span><span>140</span>
+                    </div>
+                    <div class="menu-item">
+                        <span>Mix (Half)</span><span>100</span>
+                    </div>
+                    <div class="menu-item">
+                        <span>Mix (Full)</span><span>180</span>
+                    </div>
+                </div>
+
+                <!-- Chhoyala -->
+                <div class="menu-list">
+                    <h3>Chhoyala (Full)</h3>
+                    <div class="menu-item">
+                        <span>Buff</span><span>280</span>
+                    </div>
+                    <div class="menu-item">
+                        <span>Chicken</span><span>300</span>
+                    </div>
+                </div>
+
+                <!-- Tea / Coffee -->
+                <div class="menu-list">
+                    <h3>Tea / Coffee</h3>
+                    <div class="menu-item">
+                        <span>Black Tea</span><span>20</span>
+                    </div>
+                    <div class="menu-item">
+                        <span>Milk Tea</span><span>30</span>
+                    </div>
+                    <div class="menu-item">
+                        <span>Lemon Tea</span><span>30</span>
+                    </div>
+                    <div class="menu-item">
+                        <span>Hot Lemon</span><span>50</span>
+                    </div>
+                    <div class="menu-item">
+                        <span>Cold Lemon</span><span>50</span>
+                    </div>
+                    <div class="menu-item">
+                        <span>Black Coffee</span><span>50</span>
+                    </div>
+                    <div class="menu-item">
+                        <span>Milk Coffee</span><span>80</span>
+                    </div>
+                </div>
+
+                <!-- Chicken Section -->
+                <div class="menu-list">
+                    <h3>Chicken Special</h3>
+                    <div class="menu-item">
+                        <span>Drumstick</span><span>150</span>
+                    </div>
+                    <div class="menu-item">
+                        <span>Wings</span><span>150</span>
+                    </div>
+                    <div class="menu-item">
+                        <span>Chicken Chilly</span><span>300</span>
+                    </div>
+                    <div class="menu-item">
+                        <span>Chicken Sadheko</span><span>300</span>
+                    </div>
+                </div>
+
+                <!-- Cold Drinks -->
+                <div class="menu-list">
+                    <h3>Cold Drinks</h3>
+                    <div class="menu-item">
+                        <span>Frooti</span><span>30</span>
+                    </div>
+                    <div class="menu-item">
+                        <span>Coke / Fanta</span><span>70</span>
+                    </div>
+                    <div class="menu-item">
+                        <span>Fresh Juice</span><span>100</span>
+                    </div>
+                    <div class="menu-item">
+                        <span>Plain Lassi</span><span>70</span>
+                    </div>
+                    <div class="menu-item">
+                        <span>Sweet Lassi</span><span>80</span>
+                    </div>
+                    <div class="menu-item">
+                        <span>Fruit Lassi</span><span>100</span>
+                    </div>
+                    <div class="menu-item">
+                        <span>Milk Shake</span><span>75</span>
+                    </div>
+                    <div class="menu-item">
+                        <span>Fruit Milk Shake</span><span>100</span>
+                    </div>
+                    <div class="menu-item">
+                        <span>Mineral Water</span><span>30</span>
+                    </div>
+                </div>
+
+                <!-- Sausage -->
+                <div class="menu-list">
+                    <h3>Sausage</h3>
+                    <div class="menu-item">
+                        <span>Buff</span><span>35</span>
+                    </div>
+                    <div class="menu-item">
+                        <span>Chicken</span><span>40</span>
+                    </div>
+                </div>
+
+                <!-- Noodles -->
+                <div class="menu-list">
+                    <h3>Noodles</h3>
+                    <div class="menu-item">
+                        <span>Veg</span><span>70</span>
+                    </div>
+                    <div class="menu-item">
+                        <span>Egg</span><span>100</span>
+                    </div>
+                    <div class="menu-item">
+                        <span>Buff</span><span>130</span>
+                    </div>
+                    <div class="menu-item">
+                        <span>Chicken</span><span>150</span>
+                    </div>
+                    <div class="menu-item">
+                        <span>Sadheko</span><span>90</span>
+                    </div>
+                </div>
+
+            </div><!-- .menu-lists -->
+            <!-- Facebook Page Link -->
+<a href="https://www.facebook.com/share/14DSpqv88Tn/" target="_blank" style="color: #7f14fa; text-decoration: none;">
+    <i class="fab fa-facebook-square"></i> Our Facebook Page
+</a>
+            <!-- Extra info about offers (optional) -->
+            <p style="color:#d32f2f; margin-top:15px;">
+                <span id="addon-info-en">Ask for our seasonal specials!<br>Follow us on Facebook for updates.</span>
+                <span id="addon-info-ne" style="display:none;">
+                    हाम्रो मौसमी विशेष परिकारहरू सोध्नुहोस्!<br>नयाँ अपडेटका लागि फेसबुकमा हामीलाई अनुसरण गर्नुहोस्।
+                </span>
+            </p>
+
+        </div><!-- .menu-section -->
+
+    </div><!-- .content-wrapper -->
+    <br>
+    <br>
+    <!-- ========== FOOTER ========== -->
+    <footer>
+        <b>
+            
+            <a href="https://fitandfine.github.io/anup" style="margin-left: 20px;"> <i class="fas fa-tools"></i> By </a>
+            &nbsp;|&nbsp;
+            <!-- Contact Us Button triggers contact modal -->
+            <a href="#" style="color: #fff; text-decoration: none;" onclick="showContactModal()">
+                <i class="fas fa-address-book"></i> Contact Us
+            </a>
+            &nbsp;|&nbsp;
+            <!-- Show QR (If you have a QR code for the shop) -->
+            <a href="#" onclick="showQRModal()" style="color: #fff; text-decoration: none;">
+                <i class="fas fa-qrcode"></i> QR
+            </a>
+        </b>
+    </footer>
+
+    <!-- ========== QR Modal (if you want to show a code) ========== -->
+    <div id="qrModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeQRModal()">&times;</span>
+            <!-- Replace "qr.png" with the actual QR code image if you have one -->
+            <img src="qr.png" alt="QR Code" class="qr-img">
+            <p>Thank you for sharing!</p>
+        </div>
+    </div>
+
+    <!-- ========== CONTACT MODAL ========== -->
+    <div id="contactModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeContactModal()">&times;</span>
+            <h3 style="margin-bottom:10px;">Contact Selfie Food Cafe KK Shop</h3>
+            <!-- Call or SMS to +977 9811233939 -->
+            <button class="contact-button" onclick="callCafe()">
+                Call +977 9811233939
+            </button>
+            <button class="contact-button" onclick="smsCafe()">
+                SMS +977 9811233939
+            </button>
+            <!-- WhatsApp to +977 9841163448 -->
+            <button class="contact-button" onclick="whatsappCafe()">
+                WhatsApp +977 9841163448
+            </button>
+            <!-- Save Number as .vcf contact -->
+            <button class="contact-button" onclick="saveCafeContact()">
+                Save Number
+            </button>
+        </div>
+    </div>
+
+    <!-- ========== JAVASCRIPT ========== -->
+    <script>
+        /* 
+          ========== Language Toggle ==========
+          Show/Hide English or Nepali elements by matching ID patterns ("-en" or "-ne").
+        */
+        function showEnglish() {
+            const nepaliElements = document.querySelectorAll('[id*="-ne"]');
+            nepaliElements.forEach(el => el.style.display = 'none');
+            const englishElements = document.querySelectorAll('[id*="-en"]');
+            englishElements.forEach(el => el.style.display = '');
+        }
+        function showNepali() {
+            const englishElements = document.querySelectorAll('[id*="-en"]');
+            englishElements.forEach(el => el.style.display = 'none');
+            const nepaliElements = document.querySelectorAll('[id*="-ne"]');
+            nepaliElements.forEach(el => el.style.display = '');
+        }
+
+        /* ========== QR Modal Functions (Optional) ========== */
+        function showQRModal() {
+            document.getElementById("qrModal").style.display = "block";
+        }
+        function closeQRModal() {
+            document.getElementById("qrModal").style.display = "none";
+        }
+
+        /* ========== Contact Modal Functions ========== */
+        function showContactModal() {
+            document.getElementById("contactModal").style.display = "block";
+        }
+        function closeContactModal() {
+            document.getElementById("contactModal").style.display = "none";
+        }
+
+        /* Close modals if user clicks outside them */
+        window.onclick = function(event) {
+            if (event.target === document.getElementById("qrModal")) {
+                closeQRModal();
+            }
+            if (event.target === document.getElementById("contactModal")) {
+                closeContactModal();
+            }
+        }
+
+        /* ========== Contact Actions ========== */
+        function callCafe() {
+            window.location.href = "tel:+9779811233939";
+        }
+        function smsCafe() {
+            window.location.href = "sms:+9779811233939";
+        }
+        function whatsappCafe() {
+            window.location.href = "https://wa.me/9779841163448";
+        }
+        function saveCafeContact() {
+            const vCardData =
+                "BEGIN:VCARD\n" +
+                "VERSION:3.0\n" +
+                "FN:Selfie Food Cafe KK Shop\n" +
+                "ORG:Selfie Food Cafe KK Shop\n" +
+                "TEL;TYPE=WORK,VOICE:+9779811233939\n" +
+                "TEL;TYPE=CELL:+9779841163448\n" +
+                "ADR:Golfutaar, Kathmandu\n" +
+                "END:VCARD";
+            
+            const blob = new Blob([vCardData], {type: "text/vcard"});
+            const link = document.createElement('a');
+            link.href = window.URL.createObjectURL(blob);
+            link.download = "SelfieFoodCafeKKShop.vcf";
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+    </script>
+</body>
+</html>
