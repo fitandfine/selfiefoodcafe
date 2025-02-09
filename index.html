@@ -312,6 +312,36 @@
         <div class="prominent-note" id="apology-ne" style="display:none;">
             <span>सूचना:</span> हामी सबै परिकार अर्डर पाएपछि ताजा बनाउँछौं। तयार खाना दिइँदैन।
         </div>
+<!-- 
+  Pay with eSewa Button (English)
+  -------------------------------------------------------
+  Add this where you'd like the English button to show.
+  Notice "display: ;" ensures it appears by default.
+-->
+<button 
+  id="payWithEsewa-en" 
+  class="contact-button" 
+  style="display:;" 
+  onclick="showEsewaQRModal()"
+>
+ <b> Pay with eSewa</b>
+</button>
+
+<!-- 
+  Pay with eSewa Button (Nepali)
+  -------------------------------------------------------
+  Add this where you'd like the Nepali button to show.
+  It is hidden by default using "display:none;" 
+  to match your existing language toggle logic.
+-->
+<button 
+  id="payWithEsewa-ne" 
+  class="contact-button" 
+  style="display:none;" 
+  onclick="showEsewaQRModal()"
+>
+<b>eSewa मार्फत भुक्तानी</b>
+</button>
 
      <!-- ========== MENU SECTION ========== -->
 <div class="menu-section">
@@ -1308,6 +1338,22 @@
         </b>
     </footer>
 
+
+    <!-- eSewa Payment QR Modal -->
+<div id="esewaQRModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeEsewaQRModal()">&times;</span>
+      <!-- 
+        Replace "payment_qr.jpg" with your actual QR file name if needed.
+        Make sure "payment_qr.jpg" is in the same folder as your HTML file.
+      -->
+      <img src="payment_qr.jpg" alt="Payment QR Code for eSewa" class="qr-img">
+      <p style="margin-top: 10px;">
+        Scan this QR to pay with eSewa.
+      </p>
+    </div>
+  </div>
+  
     <!-- ========== QR Modal (if you want to show a code) ========== -->
     <div id="qrModal" class="modal">
         <div class="modal-content">
@@ -1342,6 +1388,30 @@
     </div>
 
     <!-- ========== JAVASCRIPT ========== -->
+    <script>
+        /* Show the eSewa Payment QR Modal */
+        function showEsewaQRModal() {
+          document.getElementById("esewaQRModal").style.display = "block";
+        }
+      
+        /* Hide the eSewa Payment QR Modal */
+        function closeEsewaQRModal() {
+          document.getElementById("esewaQRModal").style.display = "none";
+        }
+      
+        /*
+          Optional: If you want clicking outside the modal
+          to close it, add this to your existing window.onclick:
+        */
+        window.onclick = function(event) {
+          // Existing modal close checks...
+      
+          if (event.target === document.getElementById("esewaQRModal")) {
+            closeEsewaQRModal();
+          }
+        }
+      </script>
+      
     <script>
         /* 
           ========== Language Toggle ==========
